@@ -1,4 +1,4 @@
 Django>1.8,<2.0
 boto==2.48.0
-timeout-decorator==0.3.3
-django-jsonview==1.0.0
+timeout-decorator==0.4.0
+django-jsonview==1.1.0
