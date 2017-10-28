@@ -1,0 +1,12 @@
+[run]
+source = beanstalk_dispatch
+
+[report]
+omit = beanstalk_dispatch/__init__.py
+exclude_lines =
+    pragma: no cover
+    def __repr__
+    raise AssertionError
+    raise NotImplementedError
+    if __name__ == .__main__.:
+    pass
