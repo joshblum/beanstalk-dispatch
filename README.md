@@ -1,7 +1,7 @@
 # beanstalk-dispatch
 
 [![PyPI version](https://badge.fury.io/py/beanstalk-dispatch.svg?maxAge=2592000)](https://badge.fury.io/py/beanstalk-dispatch)
-[![PyPI](https://img.shields.io/pypi/pyversions/beanstalk-dispatch.svg)](https://pypi.python.org/pypi/django-registration-redux)
+[![PyPI](https://img.shields.io/pypi/pyversions/beanstalk-dispatch.svg)](https://pypi.python.org/pypi/beanstalk-dispatch)
 [![Circle CI](https://circleci.com/gh/joshblum/beanstalk-dispatch.svg?maxAge=2592000&style=shield)](https://circleci.com/gh/joshblum/beanstalk-dispatch)
 [![Coverage Status](https://codecov.io/gh/joshblum/beanstalk-dispatch/branch/master/graph/badge.svg)](https://codecov.io/gh/joshblum/beanstalk-dispatch)
 [![Requirements Status](https://requires.io/github/joshblum/beanstalk-dispatch/requirements.svg?maxAge=2592000)](https://requires.io/github/joshblum/beanstalk-dispatch/requirements/)
