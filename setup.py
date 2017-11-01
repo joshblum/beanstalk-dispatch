@@ -11,7 +11,7 @@ setup(
     packages=find_packages(exclude='test_app'),
     description='Django application to schedule and run functions on an AWS SQS queue.',
     url='http://github.com/joshblum/beanstalk-dispatch',
-    license='MIT',
+    license='Apache 2',
     author='Joshua Blum',
     author_email='jblum18@gmail.com',
     classifiers=[
@@ -24,7 +24,6 @@ setup(
         'Framework :: Django :: 1.11',
         'Framework :: Django :: 2.0',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Programming Language :: Python :: 2.7',
