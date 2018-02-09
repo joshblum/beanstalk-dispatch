@@ -2,23 +2,28 @@
 beanstalk-dispatch changelog
 ===================================
 
-Version 0.0.4, 31 October 2017:
+Version 0.0.5, 08, 8 February, 2018
+-------------------------
+
+* Change `verbose` flag to default `True`
+
+Version 0.0.4, 31 October, 2017:
 -------------------------
 
 * Change license to Apache 2
 
 
-Version 0.0.3, 27 October 2017:
+Version 0.0.3, 27 October, 2017:
 -------------------------
 
 * Update trove classifiers
 
-Version 0.0.2, 27 October 2017:
+Version 0.0.2, 27 October, 2017:
 -------------------------
 
 * Rebundle
 
-Version 0.0.1, 27 October 2017:
+Version 0.0.1, 27 October, 2017:
 -------------------------
 
 * Initial release

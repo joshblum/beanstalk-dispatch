@@ -24,7 +24,7 @@ class SafeTask(object):
     timeout_timedelta = getattr(settings,
                                 'BEANSTALK_DISPATCH_TASK_TIMEOUT',
                                 timedelta(minutes=2))
-    verbose = False
+    verbose = True
 
     def run(self, *args, **kwargs):
         """
