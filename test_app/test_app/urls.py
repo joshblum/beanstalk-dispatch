@@ -14,10 +14,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import include
-from django.conf.urls import url
+from django.urls import re_path
 
 urlpatterns = [
     # Beanstalk Dispatch URLs
-    url(r'^beanstalk_dispatch/',
+    re_path(r'^beanstalk_dispatch/',
         include('beanstalk_dispatch.urls')),
 ]
