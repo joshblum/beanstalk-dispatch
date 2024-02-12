@@ -1,10 +1,10 @@
 import json
 from base64 import b64encode
 
-from django.core.urlresolvers import reverse
 from django.test import Client
 from django.test import TestCase
 from django.test import override_settings
+from django.urls import reverse
 
 from ..common import ARGS
 from ..common import FUNCTION
