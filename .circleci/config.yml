@@ -6,6 +6,6 @@ jobs:
         - image: themattrix/tox
     steps:
       - checkout
-      - run: pyenv local 2.7.13 3.3.6 3.4.5 3.5.2 3.6.0
+      - run: pyenv local 3.7 3.8 3.9 3.10 3.11 3.12
       - run: make installdeps
       - run: make lint && tox && codecov
