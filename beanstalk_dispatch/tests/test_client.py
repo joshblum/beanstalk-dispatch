@@ -3,7 +3,7 @@ import json
 import boto
 from django.test import TestCase
 from django.test import override_settings
-from moto import mock_sqs
+from moto import mock_sqs_deprecated
 
 from ..client import schedule_function
 from ..common import ARGS
@@ -28,7 +28,7 @@ DISPATCH_SETTINGS = {
 }
 
 
-@mock_sqs
+@mock_sqs_deprecated
 @override_settings(
     BEANSTALK_DISPATCH_SQS_KEY='', BEANSTALK_DISPATCH_SQS_SECRET='')
 class ClientTestCase(TestCase):
