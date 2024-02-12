@@ -6,7 +6,7 @@ jobs:
         - image: themattrix/tox
     steps:
       - checkout
-      - run: sudo apt-get install sqlite3
+      - run: apt-get install sqlite3
       - run: pyenv local 3.8.0 3.7.5 3.6.9
       - run: make installdeps
       - run: make lint && tox && codecov
