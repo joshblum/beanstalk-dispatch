@@ -5,7 +5,7 @@ clean:
 	find . -name '*~' -delete
 
 lint:
-	flake8 beanstalk_dispatch && isort --check-only --recursive beanstalk_dispatch
+	flake8 --max-line-length 88 beanstalk_dispatch && black --check beanstalk_dispatch && isort --check-only --recursive beanstalk_dispatch
 
 test: lint
 	test_app/manage.py test beanstalk_dispatch

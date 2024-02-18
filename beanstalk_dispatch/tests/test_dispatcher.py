@@ -78,7 +78,10 @@ class DispatcherTestCase(TestCase):
         self.assertEqual(response.status_code, 400)
         self.assertEqual(
             load_encoded_json(response.content),
-            {"message": "No beanstalk dispatch table configured", "error": 400},
+            {
+                "message": "No beanstalk dispatch table configured",
+                "error": 400,
+            },
         )
 
     def test_missing_function(self):
@@ -90,7 +93,10 @@ class DispatcherTestCase(TestCase):
         self.assertEqual(response.status_code, 400)
         self.assertEqual(
             load_encoded_json(response.content),
-            {"message": "Requested function not found: nonexistent_func", "error": 400},
+            {
+                "message": "Requested function not found: nonexistent_func",
+                "error": 400,
+            },
         )
 
     def test_invalid_task_class(self):
@@ -125,7 +131,10 @@ class DispatcherTestCase(TestCase):
         self.assertEqual(response.status_code, 400)
         self.assertEqual(
             load_encoded_json(response.content),
-            {"message": "Unable to locate function: nothing-to-see-here", "error": 400},
+            {
+                "message": "Unable to locate function: nothing-to-see-here",
+                "error": 400,
+            },
         )
 
     def test_malformed_request(self):

@@ -18,7 +18,8 @@ def schedule_function(queue_name, function_name, *args, **kwargs):
         execute_function(json.loads(body))
     else:
         connection = boto.connect_sqs(
-            settings.BEANSTALK_DISPATCH_SQS_KEY, settings.BEANSTALK_DISPATCH_SQS_SECRET
+            settings.BEANSTALK_DISPATCH_SQS_KEY,
+            settings.BEANSTALK_DISPATCH_SQS_SECRET,
         )
         queue = connection.get_queue(queue_name)
         if not queue:
