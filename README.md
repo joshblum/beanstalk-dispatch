@@ -3,7 +3,6 @@
 [![PyPI version](https://badge.fury.io/py/beanstalk-dispatch.svg?maxAge=2592000)](https://badge.fury.io/py/beanstalk-dispatch)
 [![PyPI](https://img.shields.io/pypi/pyversions/beanstalk-dispatch.svg)](https://pypi.python.org/pypi/beanstalk-dispatch)
 [![Github Actions](https://github.com/joshblum/beanstalk-dispatch/actions/workflows/ci.yml/badge.svg)](https://github.com/joshblum/beanstalk-dispatch/actions)
-[![Coverage Status](https://codecov.io/gh/joshblum/beanstalk-dispatch/branch/master/graph/badge.svg)](https://codecov.io/gh/joshblum/beanstalk-dispatch)
 [![Requirements Status](https://requires.io/github/joshblum/beanstalk-dispatch/requirements.svg?maxAge=2592000)](https://requires.io/github/joshblum/beanstalk-dispatch/requirements/)
 
 `beanstalk-dispatch` is a Django application that runs functions that have been

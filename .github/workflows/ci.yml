@@ -27,4 +27,4 @@ jobs:
           make installdeps
       - name: Test
         run: |
-          make lint && tox && codecov
+          make lint && tox
