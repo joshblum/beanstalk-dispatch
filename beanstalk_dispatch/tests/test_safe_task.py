@@ -9,10 +9,10 @@ from ..safe_task import SafeTask
 
 def get_mock_task():
     MockSafeTask = SafeTask
-    MockSafeTask.run = MagicMock(__name__='run')
-    MockSafeTask.on_error = MagicMock(__name__='on_error')
-    MockSafeTask.on_success = MagicMock(__name__='on_success')
-    MockSafeTask.on_completion = MagicMock(__name__='on_completion')
+    MockSafeTask.run = MagicMock(__name__="run")
+    MockSafeTask.on_error = MagicMock(__name__="on_error")
+    MockSafeTask.on_success = MagicMock(__name__="on_success")
+    MockSafeTask.on_completion = MagicMock(__name__="on_completion")
     return MockSafeTask()
 
 
@@ -22,9 +22,9 @@ def _sleep_too_long():
 
 class SafeTaskTestCase(TestCase):
 
-    test_error = Exception('Test exception')
-    test_args = ['test', 'args']
-    test_kwargs = {'test': 'kwargs'}
+    test_error = Exception("Test exception")
+    test_args = ["test", "args"]
+    test_kwargs = {"test": "kwargs"}
 
     """
     Test the basic SafeTask functionality
@@ -47,11 +47,9 @@ class SafeTaskTestCase(TestCase):
         task.process(*self.test_args, **self.test_kwargs)
 
         task.run.assert_called_once_with(*self.test_args, **self.test_kwargs)
-        task.on_success.assert_called_once_with(
-            *self.test_args, **self.test_kwargs)
+        task.on_success.assert_called_once_with(*self.test_args, **self.test_kwargs)
         task.on_error.assert_not_called()
-        task.on_completion.assert_called_once_with(
-            *self.test_args, **self.test_kwargs)
+        task.on_completion.assert_called_once_with(*self.test_args, **self.test_kwargs)
 
     def test_task_error(self):
         """
@@ -74,9 +72,9 @@ class SafeTaskTestCase(TestCase):
         task.run.assert_called_once_with(*self.test_args, **self.test_kwargs)
         task.on_success.assert_not_called()
         task.on_error.assert_called_once_with(
-            self.test_error, *self.test_args, **self.test_kwargs)
-        task.on_completion.assert_called_once_with(
-            *self.test_args, **self.test_kwargs)
+            self.test_error, *self.test_args, **self.test_kwargs
+        )
+        task.on_completion.assert_called_once_with(*self.test_args, **self.test_kwargs)
 
     def test_task_error_timeout(self):
         # Test timeout
@@ -90,5 +88,5 @@ class SafeTaskTestCase(TestCase):
         # There is a problem with mocks when asserting the Exception type when
         # it is TimeoutError
         self.assertEqual(task.on_error.call_count, 1)
-        self.assertEqual(str(task.on_error.call_args), 'call(TimeoutError())')
+        self.assertEqual(str(task.on_error.call_args), "call(TimeoutError())")
         task.on_completion.assert_called_once_with()

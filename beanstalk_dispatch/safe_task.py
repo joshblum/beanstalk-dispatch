@@ -21,9 +21,9 @@ class SafeTask(object):
     verbose: boolean specifying if failures are logged
     """
 
-    timeout_timedelta = getattr(settings,
-                                'BEANSTALK_DISPATCH_TASK_TIMEOUT',
-                                timedelta(minutes=2))
+    timeout_timedelta = getattr(
+        settings, "BEANSTALK_DISPATCH_TASK_TIMEOUT", timedelta(minutes=2)
+    )
     verbose = True
 
     def run(self, *args, **kwargs):
@@ -62,10 +62,9 @@ class SafeTask(object):
         except Exception as e:
             if self.verbose:
                 if isinstance(e, TimeoutError):
-                    logger.error('SafeTask timed out: %s', e, exc_info=True)
+                    logger.error("SafeTask timed out: %s", e, exc_info=True)
                 else:
-                    logger.error('Error running SafeTask: %s',
-                                 e, exc_info=True)
+                    logger.error("Error running SafeTask: %s", e, exc_info=True)
             self.on_error(e, *args, **kwargs)
         else:
             self.on_success(*args, **kwargs)

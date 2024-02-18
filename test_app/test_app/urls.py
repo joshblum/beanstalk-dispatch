@@ -13,11 +13,11 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+
 from django.conf.urls import include
 from django.urls import re_path
 
 urlpatterns = [
     # Beanstalk Dispatch URLs
-    re_path(r'^beanstalk_dispatch/',
-        include('beanstalk_dispatch.urls')),
+    re_path(r"^beanstalk_dispatch/", include("beanstalk_dispatch.urls")),
 ]
