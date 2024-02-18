@@ -1,8 +1,8 @@
 import json
 
-ARGS = 'args'
-FUNCTION = 'function'
-KWARGS = 'kwargs'
+ARGS = "args"
+FUNCTION = "function"
+KWARGS = "kwargs"
 
 
 class BeanstalkDispatchError(Exception):

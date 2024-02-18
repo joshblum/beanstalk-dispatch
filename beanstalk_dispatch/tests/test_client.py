@@ -21,28 +21,25 @@ def counter_incrementer(first_arg, second_arg=None):
 
 
 DISPATCH_SETTINGS = {
-    'BEANSTALK_DISPATCH_TABLE': {
-        'the_counter': ('beanstalk_dispatch.tests.'
-                        'test_client.counter_incrementer')
+    "BEANSTALK_DISPATCH_TABLE": {
+        "the_counter": ("beanstalk_dispatch.tests." "test_client.counter_incrementer")
     }
 }
 
 
 @mock_sqs_deprecated
-@override_settings(
-    BEANSTALK_DISPATCH_SQS_KEY='', BEANSTALK_DISPATCH_SQS_SECRET='')
+@override_settings(BEANSTALK_DISPATCH_SQS_KEY="", BEANSTALK_DISPATCH_SQS_SECRET="")
 class ClientTestCase(TestCase):
 
     def setUp(self):
-        self.queue_name = 'testing-queue'
+        self.queue_name = "testing-queue"
 
     def test_async_function_scheduling(self):
         # Schedule a function with a missing queue
-        schedule_function(
-            self.queue_name, 'a-function', '1', '2', kwarg1=1, kwarg2=2)
+        schedule_function(self.queue_name, "a-function", "1", "2", kwarg1=1, kwarg2=2)
 
         # Check the message on the queue.
-        sqs_connection = boto.connect_sqs('', '')
+        sqs_connection = boto.connect_sqs("", "")
         sqs_connection.create_queue(self.queue_name)
         queue = sqs_connection.get_queue(self.queue_name)
         messages = queue.get_messages()
@@ -52,15 +49,18 @@ class ClientTestCase(TestCase):
         # does not.  Life.
         self.assertEqual(
             json.loads(messages[0].get_body()),
-            {FUNCTION: 'a-function', ARGS: ['1', '2'], KWARGS: {
-                'kwarg1': 1, 'kwarg2': 2}})
+            {
+                FUNCTION: "a-function",
+                ARGS: ["1", "2"],
+                KWARGS: {"kwarg1": 1, "kwarg2": 2},
+            },
+        )
 
     @override_settings(
-        BEANSTALK_DISPATCH_EXECUTE_SYNCHRONOUSLY=True,
-        **DISPATCH_SETTINGS
+        BEANSTALK_DISPATCH_EXECUTE_SYNCHRONOUSLY=True, **DISPATCH_SETTINGS
     )
     def test_sync_function_scheduling(self):
         # Schedule a function.
-        schedule_function(self.queue_name, 'the_counter', 1, second_arg=5)
+        schedule_function(self.queue_name, "the_counter", 1, second_arg=5)
 
         self.assertEqual(CALL_COUNTER, 6)

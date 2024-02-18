@@ -12,7 +12,7 @@ from .execution import execute_function
 logger = logging.getLogger(__name__)
 
 
-@require_http_methods(['POST'])
+@require_http_methods(["POST"])
 @json_view
 @csrf_exempt
 def dispatcher(request):
@@ -21,5 +21,5 @@ def dispatcher(request):
         execute_function(function_request)
         return {}
     except Exception as e:
-        logger.error('Failure running function', exc_info=True)
+        logger.error("Failure running function", exc_info=True)
         raise BadRequest(e)

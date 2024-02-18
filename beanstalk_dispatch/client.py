@@ -14,12 +14,13 @@ def schedule_function(queue_name, function_name, *args, **kwargs):
     function.
     """
     body = create_request_body(function_name, *args, **kwargs)
-    if getattr(settings, 'BEANSTALK_DISPATCH_EXECUTE_SYNCHRONOUSLY', False):
+    if getattr(settings, "BEANSTALK_DISPATCH_EXECUTE_SYNCHRONOUSLY", False):
         execute_function(json.loads(body))
     else:
         connection = boto.connect_sqs(
             settings.BEANSTALK_DISPATCH_SQS_KEY,
-            settings.BEANSTALK_DISPATCH_SQS_SECRET)
+            settings.BEANSTALK_DISPATCH_SQS_SECRET,
+        )
         queue = connection.get_queue(queue_name)
         if not queue:
             queue = connection.create_queue(queue_name)
