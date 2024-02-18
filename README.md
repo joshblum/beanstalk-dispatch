@@ -2,7 +2,7 @@
 
 [![PyPI version](https://badge.fury.io/py/beanstalk-dispatch.svg?maxAge=2592000)](https://badge.fury.io/py/beanstalk-dispatch)
 [![PyPI](https://img.shields.io/pypi/pyversions/beanstalk-dispatch.svg)](https://pypi.python.org/pypi/beanstalk-dispatch)
-[![Circle CI](https://circleci.com/gh/joshblum/beanstalk-dispatch.svg?maxAge=2592000&style=shield)](https://circleci.com/gh/joshblum/beanstalk-dispatch)
+[![Github Actions](https://github.com/joshblum/beanstalk-dispatch/actions/workflows/ci.yml/badge.svg)](https://github.com/joshblum/beanstalk-dispatch/actions)
 [![Coverage Status](https://codecov.io/gh/joshblum/beanstalk-dispatch/branch/master/graph/badge.svg)](https://codecov.io/gh/joshblum/beanstalk-dispatch)
 [![Requirements Status](https://requires.io/github/joshblum/beanstalk-dispatch/requirements.svg?maxAge=2592000)](https://requires.io/github/joshblum/beanstalk-dispatch/requirements/)
 
@@ -15,8 +15,8 @@ This application was originally written by [@marcua](https://github.com/marcua)
 for [@b12io](https://github.com/b12io)'s open source application
 [orchestra](https://github.com/b12io/orchestra).
 
-The library supports Django 1.8 to Django 2.0b across Python versions 2.7 to
-3.6. If you would like to see a feature or find a bug, please let me know by
+The library supports Django 3 to Django 4 across Python versions 3.6 to
+3.10. If you would like to see a feature or find a bug, please let me know by
 opening an [issue](https://github.com/joshblum/beanstalk-dispatch/issues) or
 [pull request](https://github.com/joshblum/beanstalk-dispatch/pulls).
 
@@ -28,15 +28,15 @@ To install:
 pip install beanstalk-dispatch
 ```
 
-  * create an Elastic Beanstalk environment for an application
-that has the following two parameters in `settings.py`:
+- create an Elastic Beanstalk environment for an application
+  that has the following two parameters in `settings.py`:
 
 ```python
      BEANSTALK_DISPATCH_SQS_KEY = 'your AWS key for accessing SQS'
      BEANSTALK_DISPATCH_SQS_SECRET = 'your AWS secret for accessing SQS'
 ```
 
-  * Add `beanstalk_dispatch` to settings.py's `INSTALLED_APPS`
+- Add `beanstalk_dispatch` to settings.py's `INSTALLED_APPS`
 
 ```python
 INSTALLED_APPS = (
@@ -45,16 +45,16 @@ INSTALLED_APPS = (
 )
 ```
 
-  * Add `url(r'^beanstalk_dispatch/', include('beanstalk_dispatch.urls')),` to
-    your main `urls.py`
+- Add `url(r'^beanstalk_dispatch/', include('beanstalk_dispatch.urls')),` to
+  your main `urls.py`
 
-  * Add `/beanstalk_dispatch/dispatcher` as the HTTP endpoint or your beanstalk
-    worker configuration in the AWS console.
+- Add `/beanstalk_dispatch/dispatcher` as the HTTP endpoint or your beanstalk
+  worker configuration in the AWS console.
 
-  * Add a dispatch table.  The dispatcher works by creating an HTTP endpoint
-    that a local SQS/Beanstalk daemon POSTs requests to.  That endpoint
-    consults a `BEANSTALK_DISPATCH_TABLE`, which maps function names onto
-    functions to run.  Here's an example:
+- Add a dispatch table. The dispatcher works by creating an HTTP endpoint
+  that a local SQS/Beanstalk daemon POSTs requests to. That endpoint
+  consults a `BEANSTALK_DISPATCH_TABLE`, which maps function names onto
+  functions to run. Here's an example:
 
 ```python
       if os.environ.get('BEANSTALK_WORKER') == 'True':
@@ -65,7 +65,7 @@ INSTALLED_APPS = (
 ```
 
 The first line is a check we have that ensures this type of machine should
-be a beanstalk worker.  We set a `BEANSTALK_WORKER` environment variable to
+be a beanstalk worker. We set a `BEANSTALK_WORKER` environment variable to
 `'True'` in the environment's configuration only on our worker machines.
 This avoids other environments (e.g., our web servers) from serving as open
 proxies for running arbitrary code.
@@ -73,11 +73,10 @@ proxies for running arbitrary code.
 The second line is the dispatch table. It maps a path to the function to be
 executed.
 
-
 ## Scheduling a function to run
 
 The `beanstalk_dispatch.client.schedule_function` schedules a function to run
-on a given SQS queue.  The function name you pass it must be a key in the
+on a given SQS queue. The function name you pass it must be a key in the
 `BEANSTALK_DISPATCH_TABLE`, and the `queue_name` you pass it must be a queue
 for which a beanstalk worker is configured.
 
@@ -137,6 +136,7 @@ class MySafeTask(SafeTask):
 schedule_function('a-queue', 'mysafetask',
     '1', '2', kwarg1=1, kwarg2=2)
 ```
+
 ```
 # settings.py
   if os.environ.get('BEANSTALK_WORKER') == 'True':

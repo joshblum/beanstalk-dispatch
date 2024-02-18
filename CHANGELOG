@@ -2,28 +2,27 @@
 beanstalk-dispatch changelog
 ===================================
 
-Version 0.0.5, 08, 8 February, 2018
--------------------------
+## Version 0.1.0, 17, February, 2024
 
-* Change `verbose` flag to default `True`
+- Support Django 3 and 4
+- Drop support for Django <3
 
-Version 0.0.4, 31 October, 2017:
--------------------------
+## Version 0.0.5, 08 February, 2018
 
-* Change license to Apache 2
+- Change `verbose` flag to default `True`
 
+## Version 0.0.4, 31 October, 2017:
 
-Version 0.0.3, 27 October, 2017:
--------------------------
+- Change license to Apache 2
 
-* Update trove classifiers
+## Version 0.0.3, 27 October, 2017:
 
-Version 0.0.2, 27 October, 2017:
--------------------------
+- Update trove classifiers
 
-* Rebundle
+## Version 0.0.2, 27 October, 2017:
 
-Version 0.0.1, 27 October, 2017:
--------------------------
+- Rebundle
 
-* Initial release
+## Version 0.0.1, 27 October, 2017:
+
+- Initial release
