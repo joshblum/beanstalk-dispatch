@@ -1,5 +1,6 @@
 -rtest-requirements.txt
-tox==2.9.1
+tox
+tox-gh-actions
 twine==1.9.1
 flake8==4.0.0
 isort==4.3.21
