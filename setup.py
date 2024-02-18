@@ -7,6 +7,8 @@ from beanstalk_dispatch import get_version
 setup(
     name="beanstalk-dispatch",
     version=get_version().replace(" ", "-"),
+    long_description=open("README.md").read(),
+    long_description_content_type="text/markdown",
     packages=find_packages(exclude="test_app"),
     description="Django application to schedule and run functions on an AWS SQS queue.",
     url="http://github.com/joshblum/beanstalk-dispatch",
