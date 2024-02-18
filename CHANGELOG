@@ -2,6 +2,10 @@
 beanstalk-dispatch changelog
 ===================================
 
+## Version 0.1.1, 17, February, 2024
+
+- Add long_description to pypi
+
 ## Version 0.1.0, 17, February, 2024
 
 - Support Django 3 and 4
