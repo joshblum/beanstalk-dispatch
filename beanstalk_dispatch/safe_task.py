@@ -3,8 +3,8 @@ from contextlib import contextmanager
 from datetime import timedelta
 
 from django.conf import settings
-from timeout_decorator import timeout as timeout_decorator
 from timeout_decorator import TimeoutError
+from timeout_decorator import timeout as timeout_decorator
 
 logger = logging.getLogger(__name__)
 

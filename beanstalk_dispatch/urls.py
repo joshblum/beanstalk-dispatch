@@ -1,7 +1,7 @@
-from django.conf.urls import url
+from django.urls import re_path
 
 from .views import dispatcher
 
 urlpatterns = [
-    url(r'^', dispatcher, name='beanstalk_dispatcher')
+    re_path(r'^', dispatcher, name='beanstalk_dispatcher')
 ]
