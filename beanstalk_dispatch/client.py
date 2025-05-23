@@ -1,6 +1,7 @@
 import json
 
-import boto.sqs
+import boto3
+from botocore.exceptions import ClientError
 from django.conf import settings
 
 from .common import create_request_body
@@ -17,13 +18,18 @@ def schedule_function(queue_name, function_name, *args, **kwargs):
     if getattr(settings, "BEANSTALK_DISPATCH_EXECUTE_SYNCHRONOUSLY", False):
         execute_function(json.loads(body))
     else:
-        connection = boto.connect_sqs(
-            settings.BEANSTALK_DISPATCH_SQS_KEY,
-            settings.BEANSTALK_DISPATCH_SQS_SECRET,
+        sqs = boto3.client(
+            "sqs",
+            aws_access_key_id=settings.BEANSTALK_DISPATCH_SQS_KEY,
+            aws_secret_access_key=settings.BEANSTALK_DISPATCH_SQS_SECRET,
         )
-        queue = connection.get_queue(queue_name)
-        if not queue:
-            queue = connection.create_queue(queue_name)
-        message = boto.sqs.message.Message()
-        message.set_body(body)
-        queue.write(message)
+
+        try:
+            queue_url = sqs.get_queue_url(QueueName=queue_name)["QueueUrl"]
+        except ClientError as e:
+            if "NonExistentQueue" in str(e) or "QueueDoesNotExist" in str(e):
+                queue_url = sqs.create_queue(QueueName=queue_name)["QueueUrl"]
+            else:
+                raise ClientError(e)
+
+        sqs.send_message(QueueUrl=queue_url, MessageBody=body)
