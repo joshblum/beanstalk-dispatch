@@ -1,5 +1,5 @@
-import json
 import base64
+import json
 
 import boto3
 import six
@@ -15,8 +15,8 @@ def encode_message(value):
     Encode the message in the same way boto2 did with queue.write(message)
     """
     if not isinstance(value, six.binary_type):
-        value = value.encode('utf-8')
-    return base64.b64encode(value).decode('utf-8')
+        value = value.encode("utf-8")
+    return base64.b64encode(value).decode("utf-8")
 
 
 def schedule_function(queue_name, function_name, *args, **kwargs):

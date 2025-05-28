@@ -1,4 +1,5 @@
 import json
+from base64 import b64decode
 
 import boto3
 from django.test import TestCase
@@ -49,8 +50,11 @@ class ClientTestCase(TestCase):
         messages = response.get("Messages", [])
         self.assertEqual(len(messages), 1)
 
+        message_body = messages[0]["Body"]
+        body_content = json.loads(b64decode(message_body).decode())
+
         self.assertEqual(
-            json.loads(messages[0]["Body"]),
+            body_content,
             {
                 FUNCTION: "a-function",
                 ARGS: ["1", "2"],
