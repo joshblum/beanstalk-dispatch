@@ -1,11 +1,22 @@
 import json
+import base64
 
 import boto3
+import six
 from botocore.exceptions import ClientError
 from django.conf import settings
 
 from .common import create_request_body
 from .execution import execute_function
+
+
+def encode_message(value):
+    """
+    Encode the message in the same way boto2 did with queue.write(message)
+    """
+    if not isinstance(value, six.binary_type):
+        value = value.encode('utf-8')
+    return base64.b64encode(value).decode('utf-8')
 
 
 def schedule_function(queue_name, function_name, *args, **kwargs):
@@ -32,4 +43,6 @@ def schedule_function(queue_name, function_name, *args, **kwargs):
             else:
                 raise ClientError(e)
 
-        sqs.send_message(QueueUrl=queue_url, MessageBody=body)
+        # Encode the message body before sending
+        encoded_body = encode_message(body)
+        sqs.send_message(QueueUrl=queue_url, MessageBody=encoded_body)
