@@ -31,6 +31,7 @@ def schedule_function(queue_name, function_name, *args, **kwargs):
     else:
         sqs = boto3.client(
             "sqs",
+            region_name=getattr(settings, "BEANSTALK_DISPATCH_SQS_REGION", "us-east-1"),
             aws_access_key_id=settings.BEANSTALK_DISPATCH_SQS_KEY,
             aws_secret_access_key=settings.BEANSTALK_DISPATCH_SQS_SECRET,
         )
