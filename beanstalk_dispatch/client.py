@@ -43,6 +43,5 @@ def schedule_function(queue_name, function_name, *args, **kwargs):
             else:
                 raise ClientError(e)
 
-        # Encode the message body before sending
         encoded_body = encode_message(body)
         sqs.send_message(QueueUrl=queue_url, MessageBody=encoded_body)

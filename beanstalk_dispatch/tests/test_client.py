@@ -41,7 +41,6 @@ class ClientTestCase(TestCase):
 
         # Check the message on the queue.
         sqs = boto3.client("sqs", region_name="us-east-1")
-        # Create queue to ensure it exists (although schedule_function should create it)
         queue_url = sqs.create_queue(QueueName=self.queue_name)["QueueUrl"]
 
         # Get messages from the queue
