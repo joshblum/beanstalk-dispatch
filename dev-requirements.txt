@@ -2,7 +2,7 @@
 tox
 tox-gh-actions
 twine==6.1.0
-flake8==7.2.0
+flake8==7.1.2
 isort==4.3.21
 coverage
 black
