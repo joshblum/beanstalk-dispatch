@@ -14,7 +14,7 @@ def encode_message(value):
     """
     Encode the message in the same way boto2 did with queue.write(message)
     """
-    if not isinstance(value, six.binary_type):
+    if not isinstance(value, bytes):
         value = value.encode("utf-8")
     return base64.b64encode(value).decode("utf-8")
 
@@ -42,7 +42,7 @@ def schedule_function(queue_name, function_name, *args, **kwargs):
             if "NonExistentQueue" in str(e) or "QueueDoesNotExist" in str(e):
                 queue_url = sqs.create_queue(QueueName=queue_name)["QueueUrl"]
             else:
-                raise ClientError(e)
+               raise
 
         encoded_body = encode_message(body)
         sqs.send_message(QueueUrl=queue_url, MessageBody=encoded_body)
