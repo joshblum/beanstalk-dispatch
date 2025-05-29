@@ -1,9 +1,10 @@
 import json
+from base64 import b64decode
 
-import boto
+import boto3
 from django.test import TestCase
 from django.test import override_settings
-from moto import mock_sqs_deprecated
+from moto import mock_aws
 
 from ..client import schedule_function
 from ..common import ARGS
@@ -27,7 +28,7 @@ DISPATCH_SETTINGS = {
 }
 
 
-@mock_sqs_deprecated
+@mock_aws
 @override_settings(BEANSTALK_DISPATCH_SQS_KEY="", BEANSTALK_DISPATCH_SQS_SECRET="")
 class ClientTestCase(TestCase):
 
@@ -39,16 +40,20 @@ class ClientTestCase(TestCase):
         schedule_function(self.queue_name, "a-function", "1", "2", kwarg1=1, kwarg2=2)
 
         # Check the message on the queue.
-        sqs_connection = boto.connect_sqs("", "")
-        sqs_connection.create_queue(self.queue_name)
-        queue = sqs_connection.get_queue(self.queue_name)
-        messages = queue.get_messages()
+        sqs = boto3.client("sqs", region_name="us-east-1")
+        queue_url = sqs.create_queue(QueueName=self.queue_name)["QueueUrl"]
+
+        # Get messages from the queue
+        response = sqs.receive_message(QueueUrl=queue_url, MaxNumberOfMessages=1)
+
+        messages = response.get("Messages", [])
         self.assertEqual(len(messages), 1)
 
-        # For some reason, boto base64-encodes the messages, but moto
-        # does not.  Life.
+        message_body = messages[0]["Body"]
+        body_content = json.loads(b64decode(message_body).decode())
+
         self.assertEqual(
-            json.loads(messages[0].get_body()),
+            body_content,
             {
                 FUNCTION: "a-function",
                 ARGS: ["1", "2"],
