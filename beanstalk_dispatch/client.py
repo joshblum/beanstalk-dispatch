@@ -2,7 +2,6 @@ import base64
 import json
 
 import boto3
-import six
 from botocore.exceptions import ClientError
 from django.conf import settings
 
@@ -42,7 +41,7 @@ def schedule_function(queue_name, function_name, *args, **kwargs):
             if "NonExistentQueue" in str(e) or "QueueDoesNotExist" in str(e):
                 queue_url = sqs.create_queue(QueueName=queue_name)["QueueUrl"]
             else:
-               raise
+                raise
 
         encoded_body = encode_message(body)
         sqs.send_message(QueueUrl=queue_url, MessageBody=encoded_body)
