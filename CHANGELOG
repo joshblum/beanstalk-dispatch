@@ -2,6 +2,10 @@
 beanstalk-dispatch changelog
 ===================================
 
+## Version 0.1.2, 29, May, 2025
+
+- Upgrade boto2 dependency to boto3
+
 ## Version 0.1.1, 17, February, 2024
 
 - Add long_description to pypi
