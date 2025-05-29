@@ -16,9 +16,10 @@ installdeps:
 	pip install -r dev-requirements.txt
 
 release: clean lint test
-	ifeq ($(TAG_NAME),)
-	$(error Usage: make release TAG_NAME=<tag-name>)
-	endif
+	@if [ -z "$(TAG_NAME)" ]; then \
+		echo "Usage: make release TAG_NAME=<tag-name>"; \
+		exit 1; \
+	fi
 	# NOTE(joshblum): First you should update the changelog and bump the
 	# version in setup.py
 	git clean -dxf
