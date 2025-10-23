@@ -5,7 +5,7 @@ from beanstalk_dispatch import get_version
 
 
 setup(
-    name="beanstalk-dispatch",
+    name="beanstalk_dispatch",
     version=get_version().replace(" ", "-"),
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
