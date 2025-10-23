@@ -26,7 +26,7 @@ release: clean lint test
 	git tag $(TAG_NAME)
 	git push --tags
 	# Create the wheels for Python2 and Python3.
-	python setup.py sdist bdist_wheel --universal
+	python3 setup.py sdist bdist_wheel --universal
 	# To check whether the README formats properly.
 	twine check dist/*
 	# Upload to pypi.
