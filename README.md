@@ -13,7 +13,7 @@ This application was originally written by [@marcua](https://github.com/marcua)
 for [@b12io](https://github.com/b12io)'s open source application
 [orchestra](https://github.com/b12io/orchestra).
 
-The library supports Django 3 to Django 5.2 across Python versions 3.10 to
+The library supports Django 4 to Django 5.2 across Python versions 3.10 to
 3.12. If you would like to see a feature or find a bug, please let me know by
 opening an [issue](https://github.com/joshblum/beanstalk-dispatch/issues) or
 [pull request](https://github.com/joshblum/beanstalk-dispatch/pulls).
